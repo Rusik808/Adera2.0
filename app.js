@@ -244,6 +244,24 @@ for (const row of lists) {
     };
   }
 
+  // 2.1) Добавляем автогенерацию карточек из ProductLists, если их нет в Products
+for (const row of lists) {
+  const id = (row.id || "").trim();
+  if (!id) continue;
+
+  // если карточки нет в листе Products — создаём её автоматически
+  if (!prodMap[id]) {
+    prodMap[id] = {
+      id,
+      title: row.title || "",
+      image: row.image || "",
+      inStock: String(row.inStock || "").toLowerCase() === "true",
+      brand: row.brand || "",
+      specs: {} // можно оставить пустым
+    };
+  }
+}
+
   // 3) Варианты из листа Variants (если есть)
   if (variantsRows && variantsRows.length) {
     // product_id -> массив вариантов
