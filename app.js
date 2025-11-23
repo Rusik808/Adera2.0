@@ -521,6 +521,14 @@ function renderProductDetail({id}){
       </div>
     </div>
   `;
+
+  setTimeout(() => {
+  const detail = document.querySelector(".detail");
+  if (detail) {
+    const y = detail.getBoundingClientRect().top + window.pageYOffset - 80; 
+    window.scrollTo({ top: y, behavior: "smooth" });
+  }
+}, 0);
 }
 
 
@@ -564,6 +572,7 @@ document.addEventListener('click', (e) => {
 
   window.scrollTo({ top: y, behavior: 'smooth' });
 });
+
 
 
 
