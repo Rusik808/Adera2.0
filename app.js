@@ -27,7 +27,7 @@ const DATA = {
       { slug: "truby_vnutrennej_kanalizatsii", title: "Трубы внутренней канализации", image: "img/Трубы внутренней канализации.png" },
       { slug: "maloshumnaja_kanalizatsija", title: "Трубы малошумной канализации", image: "img/1828.png" },
       { slug: "pnd-pipes", title: "Трубы ПНД", image: "img/871.png" },
-      { slug: "sistema_iz_nerzhaveyushchej_stali", title: "Система из нержавеющей стали", image: "img/nerzhav.png" },
+      { slug: "sistema_iz_nerzhaveyushchej_stali", title: "Система из нержавеющей стали", image: "img/SS_Sys4.png" },
     ],
     fitingi: [
       { slug: "fitingi_ppr_belye", title: "Фитинги PPR белые", image: "img/1575.png" },
@@ -573,6 +573,7 @@ document.addEventListener('click', (e) => {
 
   window.scrollTo({ top: y, behavior: 'smooth' });
 });
+
 
 
 
