@@ -475,19 +475,63 @@ function renderProductList({cat, sub}) {
     attachPaginationEvents(arr.length);
   }
 
-  function createPagination(totalItems) {
-    const totalPages = Math.ceil(totalItems / ITEMS_PER_PAGE);
-    if (totalPages <= 1) return "";
+function createPagination(totalItems) {
+  const totalPages = Math.ceil(totalItems / ITEMS_PER_PAGE);
+  if (totalPages <= 1) return "";
 
-    let html = `<button class="page-btn prev" data-dir="-1">‹</button>`;
+  let html = "";
 
-    for (let i = 1; i <= totalPages; i++) {
-      html += `<button class="page-btn ${i === currentPage ? "active" : ""}" data-page="${i}">${i}</button>`;
-    }
-
-    html += `<button class="page-btn next" data-dir="1">›</button>`;
-    return html;
+  function pageButton(page, text = page) {
+    const active = page === currentPage ? "active" : "";
+    return `<button class="page-btn ${active}" data-page="${page}">${text}</button>`;
   }
+
+  function dots() {
+    return `<span class="dots">…</span>`;
+  }
+
+  // ← КНОПКА НАЗАД
+  html += `<button class="page-btn prev" data-dir="-1">‹</button>`;
+
+  // 1) ВСЕГДА показываем страницу 1
+  html += pageButton(1);
+
+  // 2) Левые точки
+  if (currentPage > 4) {
+    html += dots();
+  }
+
+  // 3) Левый сосед (currentPage-1)
+  if (currentPage > 2) {
+    html += pageButton(currentPage - 1);
+  }
+
+  // 4) ТЕКУЩАЯ страница
+  if (currentPage !== 1 && currentPage !== totalPages) {
+    html += pageButton(currentPage);
+  }
+
+  // 5) Правый сосед (currentPage+1)
+  if (currentPage < totalPages - 1) {
+    html += pageButton(currentPage + 1);
+  }
+
+  // 6) Правые точки
+  if (currentPage < totalPages - 3) {
+    html += dots();
+  }
+
+  // 7) ВСЕГДА показываем последнюю страницу
+  if (totalPages > 1) {
+    html += pageButton(totalPages);
+  }
+
+  // → КНОПКА ВПЕРЁД
+  html += `<button class="page-btn next" data-dir="1">›</button>`;
+
+  return html;
+}
+
 
   function attachPaginationEvents(totalItems) {
     const totalPages = Math.ceil(totalItems / ITEMS_PER_PAGE);
@@ -621,6 +665,7 @@ document.addEventListener('click', (e) => {
 
   window.scrollTo({ top: y, behavior: 'smooth' });
 });
+
 
 
 
