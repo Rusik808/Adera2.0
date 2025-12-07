@@ -354,6 +354,91 @@ a{
   font-size: 18px;
 }
 
+.search-wrapper {
+  position: absolute;
+  right: 40px;
+  top: 30px;
+  width: 280px;
+  z-index: 10000;
+}
+
+.catalog-header, .main-title {
+   position: relative;
+}
+
+
+.search-input {
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  transition: 0.25s;
+}
+
+.search-input:focus {
+  border-color: #6b4bff;
+  box-shadow: 0 0 6px rgba(107, 75, 255, 0.4);
+}
+
+.suggestions {
+  position: absolute;
+  top: 45px;
+  left: 0;
+  width: 100%;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+  max-height: 330px;
+  overflow-y: auto;
+  opacity: 0;
+  transform: translateY(-10px);
+  pointer-events: none;
+  transition: 0.25s ease;
+  z-index: 9999;
+}
+
+.suggestions:not(:empty) {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.suggest-item {
+  padding: 10px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  cursor: pointer;
+  transition: 0.15s;
+}
+
+.suggest-item:hover {
+  background: #f3f0ff;
+}
+
+.suggest-img {
+  width: 45px;
+  height: 45px;
+  border-radius: 6px;
+  object-fit: cover;
+}
+
+.suggest-title {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.suggest-brand {
+  font-size: 12px;
+  color: #777;
+}
+
+.no-result {
+  padding: 10px;
+  text-align: center;
+  color: #999;
+}
+
 
 /*contact*/
 .catalog{
@@ -915,4 +1000,5 @@ form {
   scroll-margin-top: 90px;
 
 }
+
 
