@@ -348,6 +348,13 @@ a{
   padding: 6px 12px;
 }
 
+.dots {
+  padding: 6px 8px;
+  color: #888;
+  font-size: 18px;
+}
+
+
 /*contact*/
 .catalog{
   max-width:1200px;
@@ -908,3 +915,4 @@ form {
   scroll-margin-top: 90px;
 
 }
+
