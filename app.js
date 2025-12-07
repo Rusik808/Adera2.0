@@ -14,7 +14,8 @@ const DATA = {
     { slug: "kollektory", title: "Коллекторы", image: "img/Коллекторы.jpg" },
     { slug: "nasosy", title: "Насосы", image: "img/Насосы.png" },
     { slug: "kontrolno-izmeritelnye-pribory", title: "Контрольно-измерительные приборы", image: "img/Манометр.jpg" },
-    { slug: "truboprovodnye-sistemy", title: "Аксессуары для тёплого пола", image: "img/аксесуары.jpg" }
+    { slug: "truboprovodnye-sistemy", title: "Аксессуары для тёплого пола", image: "img/аксесуары.jpg" },
+    { slug: "sistema-iz-otsinkovannoy-stali", title: "Система из оцинкованной стали", image: "img/Система из оцинкованной стали.jpg" }
   ],
 
   
@@ -678,6 +679,7 @@ document.addEventListener('click', (e) => {
 
   window.scrollTo({ top: y, behavior: 'smooth' });
 });
+
 
 
 
