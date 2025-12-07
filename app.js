@@ -9,7 +9,7 @@ const DATA = {
     { slug: "fitingi", title: "Фитинги", image: "img/фитинг.png" },
     { slug: "armatura", title: "Запорная арматура", image: "img/запорная-арматура.png" },
     { slug: "welding_machine", title: "Сварочное оборудование", image: "img/296.png" },
-    { slug: "tekhnicheskaya-teploizolyatsiya", title: "Техническая теплоизоляция", image: "img/ТЕХтепло.jpg" },
+    { slug: "tekhnicheskaya_teploizolyatsiya", title: "Техническая теплоизоляция", image: "img/ТЕХтепло.jpg" },
     { slug: "krany-mvi", title: "Краны MVI", image: "img/Краны_MVI.png" },
     { slug: "kollektory", title: "Коллекторы", image: "img/Коллекторы.jpg" },
     { slug: "nasosy", title: "Насосы", image: "img/Насосы.png" },
@@ -46,6 +46,9 @@ const DATA = {
       { slug: "fitingi_naruzhnoj_kanalizatsii", title: "Фитинги наружной канализации", image: "img/999.png" },
       { slug: "fitingi_vnutrennej_kanalizatsii", title: "Фитинги внутренней канализации", image: "img/1028.png" },
       { slug: "fitingi_maloshumnoj_kanalizatsii", title: "Фитинги малошумной канализации", image: "img/1809.png" },
+    ],
+    tekhnicheskaya_teploizolyatsiya: [
+      { slug: "trubnaya-teploizolyatsiya", title: "Трубная теплоизоляция", image: "img/тепло.jpg" },
     ],
   },
 
@@ -675,6 +678,7 @@ document.addEventListener('click', (e) => {
 
   window.scrollTo({ top: y, behavior: 'smooth' });
 });
+
 
 
 
