@@ -10,7 +10,11 @@ const DATA = {
     { slug: "armatura", title: "Запорная арматура", image: "img/запорная-арматура.png" },
     { slug: "welding_machine", title: "Сварочное оборудование", image: "img/296.png" },
     { slug: "tekhnicheskaya-teploizolyatsiya", title: "Техническая теплоизоляция", image: "img/ТЕХтепло.jpg" },
-    { slug: "krany-mvi", title: "Краны MVI", image: "img/Краны_MVI.png" }
+    { slug: "krany-mvi", title: "Краны MVI", image: "img/Краны_MVI.png" },
+    { slug: "kollektory", title: "Коллекторы", image: "img/Коллекторы.png" },
+    { slug: "nasosy", title: "Насосы", image: "img/Насосы.png" },
+    { slug: "kontrolno-izmeritelnye-pribory", title: "Контрольно-измерительные приборы", image: "img/Контрольно-измерительные приборы.png" },
+    { slug: "truboprovodnye-sistemy", title: "Аксессуары для тёплого пола", image: "img/Аксессуары для тёплого пола.png" }
   ],
 
   
@@ -671,6 +675,7 @@ document.addEventListener('click', (e) => {
 
   window.scrollTo({ top: y, behavior: 'smooth' });
 });
+
 
 
 
