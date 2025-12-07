@@ -315,7 +315,38 @@ a{
           mask:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="black" d="M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>') center/contain no-repeat;
 }
 
+.pagination-wrapper {
+  display: flex;
+  justify-content: center;
+  margin: 25px 0 40px;
+  gap: 6px;
+}
 
+.page-btn {
+  padding: 8px 14px;
+  border: 1px solid #ccc;
+  background: #fff;
+  cursor: pointer;
+  border-radius: 6px;
+  font-size: 14px;
+  transition: 0.2s;
+}
+
+.page-btn:hover {
+  background: #f2f2f2;
+}
+
+.page-btn.active {
+  background: #4c48e5;
+  color: #fff;
+  border-color: #4c48e5;
+}
+
+.page-btn.prev,
+.page-btn.next {
+  font-size: 18px;
+  padding: 6px 12px;
+}
 
 /*contact*/
 .catalog{
@@ -875,4 +906,5 @@ form {
 }
 #app {
   scroll-margin-top: 90px;
+
 }
