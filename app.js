@@ -317,9 +317,14 @@ const routes = {
 };
 
 function parseHash(){
-  const h = location.hash.slice(1);
-  return h.startsWith('/') ? h : null;
+  // location.hash = "#/category/truby/pnd-pipes?page=5"
+  const full = location.hash.slice(1); // "/category/truby/pnd-pipes?page=5"
+  if (!full) return null;
+
+  const [path] = full.split("?");      // берём только "/category/truby/pnd-pipes"
+  return path.startsWith("/") ? path : null;
 }
+
 
 function matchRoute(path){
   for(const [pattern, handler] of Object.entries(routes)){
@@ -418,58 +423,101 @@ function renderProductList({cat, sub}) {
   const key = sub ? `${cat}/${sub}` : cat;
   const list = (DATA.productLists[key] || []).slice();
 
-  // если список пустой и мы на уровне категории — вернёмся к подкатегориям
   if (!list.length && sub == null) { 
     renderCategory({cat}); 
     return; 
   }
 
-  const title = sub 
-    ? `${titleFrom(cat)} • ${titleSub(cat, sub)}` 
-    : `${titleFrom(cat)}`;
-  const backHref = sub ? `#/category/${cat}` : '#/';
+  const ITEMS_PER_PAGE = 12;
 
-  // карточки с картинками
-  app.innerHTML = `
-    <a class="back" href="${backHref}"><i></i>Назад</a>
-    <h1 class="section-title">${title}</h1>
+  // ===== ЧИТАЕМ page ИЗ location.hash =====
+  // пример hash: "#/category/truby/pnd-pipes?page=5"
+  const hash = window.location.hash || "";
+  const [, query = ""] = hash.split("?");
+  const params = new URLSearchParams(query);
+  let currentPage = Number(params.get("page")) || 1;
 
-    <div class="toolbar">
-      <span class="subtle">Сортировать по</span>
-      <select id="sort" class="select">
-        <option value="name-asc">Названию ↑</option>
-        <option value="name-desc">Названию ↓</option>
-      </select>
-    </div>
+  function paginate(arr, page) {
+    const start = (page - 1) * ITEMS_PER_PAGE;
+    return arr.slice(start, start + ITEMS_PER_PAGE);
+  }
 
-    <div class="grid" id="prodGrid"></div>
-  `;
+  function draw() {
+    const arr = list.slice().sort((a,b)=>a.title.localeCompare(b.title,'ru'));
+    const totalPages = Math.ceil(arr.length / ITEMS_PER_PAGE);
+    if (currentPage < 1) currentPage = 1;
+    if (currentPage > totalPages) currentPage = totalPages || 1;
 
-  const grid = document.getElementById("prodGrid");
-  const select = document.getElementById("sort");
+    const pageItems = paginate(arr, currentPage);
 
-  const draw = () => {
-    const arr = list.slice().sort((a,b)=>{
-      if (select.value === "name-desc") 
-        return b.title.localeCompare(a.title,'ru');
-      return a.title.localeCompare(b.title,'ru');
+    app.innerHTML = `
+      <a class="back" href="#/${sub ? `category/${cat}` : ''}"><i></i>Назад</a>
+      <h1 class="section-title">${sub ? titleSub(cat, sub) : titleFrom(cat)}</h1>
+
+      <div class="grid">
+        ${pageItems.map(p => `
+          <a class="prod-card" href="#/product/${p.id}">
+            <div class="prod-img" style="background-image:url('${p.image}')"></div>
+            <div class="badge ${p.inStock ? "in-stock" : "out-stock"}">
+              <i></i>${p.inStock ? "В наличии" : "Нет в наличии"}
+            </div>
+            <div class="prod-title">${p.title}</div>
+            <div class="subtle">${p.brand || ""}</div>
+          </a>
+        `).join("")}
+      </div>
+
+      <div class="pagination-wrapper">
+        ${createPagination(arr.length)}
+      </div>
+    `;
+
+    attachPaginationEvents(arr.length);
+  }
+
+  function createPagination(totalItems) {
+    const totalPages = Math.ceil(totalItems / ITEMS_PER_PAGE);
+    if (totalPages <= 1) return "";
+
+    let html = `<button class="page-btn prev" data-dir="-1">‹</button>`;
+
+    for (let i = 1; i <= totalPages; i++) {
+      html += `<button class="page-btn ${i === currentPage ? "active" : ""}" data-page="${i}">${i}</button>`;
+    }
+
+    html += `<button class="page-btn next" data-dir="1">›</button>`;
+    return html;
+  }
+
+  function attachPaginationEvents(totalItems) {
+    const totalPages = Math.ceil(totalItems / ITEMS_PER_PAGE);
+    const base = `#/category/${cat}` + (sub ? `/${sub}` : "");
+
+    // номера страниц
+    document.querySelectorAll(".page-btn[data-page]").forEach(btn => {
+      btn.addEventListener("click", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        const page = Number(btn.dataset.page);
+        navigate(`${base}?page=${page}`);   // меняем hash -> роутер сам вызовет renderProductList заново
+      });
     });
 
-    grid.innerHTML = arr.map(p => `
-      <a class="prod-card" href="#/product/${p.id}">
-        <div class="prod-img" style="background-image:url('${p.image || "img/no-photo.png"}')"></div>
-        <div class="badge ${p.inStock ? "in-stock" : "out-stock"}">
-          <i></i>${p.inStock ? "В наличии" : "Нет в наличии"}
-        </div>
-        <div class="prod-title">${p.title}</div>
-        <div class="subtle">${p.brand || ""}</div>
-      </a>
-    `).join("");
-  };
+    // стрелки ‹ ›
+    document.querySelectorAll(".page-btn[data-dir]").forEach(btn => {
+      btn.addEventListener("click", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        const dir = Number(btn.dataset.dir);
+        const page = Math.min(Math.max(1, currentPage + dir), totalPages);
+        navigate(`${base}?page=${page}`);
+      });
+    });
+  }
 
-  select.addEventListener("change", draw);
   draw();
 }
+
 
 
 
@@ -573,6 +621,7 @@ document.addEventListener('click', (e) => {
 
   window.scrollTo({ top: y, behavior: 'smooth' });
 });
+
 
 
 
