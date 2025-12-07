@@ -439,6 +439,26 @@ a{
   color: #999;
 }
 
+/* --- МОБИЛЬНАЯ АДАПТАЦИЯ ДЛЯ ПОИСКА --- */
+@media (max-width: 768px) {
+  .search-wrapper {
+    position: static !important;   /* больше не absolute */
+    width: 100% !important;
+    margin: 0 auto 15px auto;
+    display: block;
+  }
+
+  .search-input {
+    width: 100%;
+    font-size: 16px;
+  }
+
+  .suggestions {
+    top: 50px !important;   /* поправка выпадающего блока */
+    width: 100% !important;
+  }
+}
+
 
 /*contact*/
 .catalog{
@@ -1000,5 +1020,6 @@ form {
   scroll-margin-top: 90px;
 
 }
+
 
 
