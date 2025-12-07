@@ -400,15 +400,74 @@ function cardHTML({title,image,href}){
   `;
 }
 
-function renderHome(){
+function renderHome() {
   app.innerHTML = `
-    <h1 class="section-title main-title">Каталог</h1>
-    <div class="grid">
+    <div class="catalog-header">
+      <h1 class="section-title main-title">Каталог</h1>
+      <div class="search-wrapper">
+        <input type="text" id="globalSearch" placeholder="Поиск товаров..." autocomplete="off" class="search-input"/>
+        <div id="searchSuggestions" class="suggestions"></div>
+      </div>
+    </div>
+
+    <div class="grid" id="categoryGrid">
       ${DATA.categories.map(c => cardHTML({
-        title:c.title, image:c.image, href:`#/category/${c.slug}`
+        title:c.title,
+        image:c.image,
+        href:`#/category/${c.slug}`
       })).join("")}
     </div>
   `;
+
+  const search = document.getElementById("globalSearch");
+  const box = document.getElementById("searchSuggestions");
+
+  search.addEventListener("input", () => showSuggestions(search.value.trim(), box));
+  search.addEventListener("focus", () => showSuggestions(search.value.trim(), box));
+  document.addEventListener("click", e => {
+    if (!e.target.closest(".search-wrapper")) box.innerHTML = "";
+  });
+}
+
+function showSuggestions(query, box) {
+  if (!query) {
+    box.innerHTML = "";
+    return;
+  }
+
+  const q = query.toLowerCase();
+
+  // собираем ВСЕ товары
+  const allProducts = Object.values(DATA.products);
+
+  const results = allProducts.filter(p =>
+    p.title.toLowerCase().includes(q) ||
+    (p.brand || "").toLowerCase().includes(q) ||
+    p.id.toLowerCase().includes(q)
+  ).slice(0, 8); // максимум 8 подсказок
+
+  if (!results.length) {
+    box.innerHTML = `<div class="no-result">Ничего не найдено</div>`;
+    return;
+  }
+
+  box.innerHTML = results.map(p => `
+    <div class="suggest-item" data-id="${p.id}">
+      <img src="${p.image}" class="suggest-img">
+      <div>
+        <div class="suggest-title">${p.title}</div>
+        <div class="suggest-brand">${p.brand || ""}</div>
+      </div>
+    </div>
+  `).join("");
+
+  // переход по клику
+  document.querySelectorAll(".suggest-item").forEach(item => {
+    item.onclick = () => {
+      location.hash = `#/product/${item.dataset.id}`;
+      box.innerHTML = "";
+    };
+  });
 }
 
 function renderCategory({cat}){
@@ -681,6 +740,7 @@ document.addEventListener('click', (e) => {
 
   window.scrollTo({ top: y, behavior: 'smooth' });
 });
+
 
 
 
