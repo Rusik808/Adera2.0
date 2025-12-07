@@ -9,7 +9,7 @@ const DATA = {
     { slug: "fitingi", title: "Фитинги", image: "img/фитинг.png" },
     { slug: "armatura", title: "Запорная арматура", image: "img/запорная-арматура.png" },
     { slug: "welding_machine", title: "Сварочное оборудование", image: "img/296.png" },
-     { slug: "tekhnicheskaya-teploizolyatsiya", title: "Техническая теплоизоляция", image: "img/296.png" }
+     { slug: "tekhnicheskaya-teploizolyatsiya", title: "Техническая теплоизоляция", image: "img/ТЕХтепло.jpg" }
   ],
 
   
@@ -670,6 +670,7 @@ document.addEventListener('click', (e) => {
 
   window.scrollTo({ top: y, behavior: 'smooth' });
 });
+
 
 
 
