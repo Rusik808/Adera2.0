@@ -47,7 +47,7 @@ const DATA = {
       { slug: "fitingi_naruzhnoj_kanalizatsii", title: "Фитинги наружной канализации", image: "img/999.png" },
       { slug: "fitingi_vnutrennej_kanalizatsii", title: "Фитинги внутренней канализации", image: "img/1028.png" },
       { slug: "fitingi_maloshumnoj_kanalizatsii", title: "Фитинги малошумной канализации", image: "img/1809.png" },
-      { slug: "rezbovye-latunnye-fitingi", title: "Резьбовые латунные фитинги", image: "img/Резьбовые латунные фитинги.png" },
+      { slug: "rezbovye-latunnye-fitingi", title: "Резьбовые латунные фитинги", image: "img/латуньФитингpng.png" },
     ],
     
     tekhnicheskaya_teploizolyatsiya: [
@@ -681,6 +681,7 @@ document.addEventListener('click', (e) => {
 
   window.scrollTo({ top: y, behavior: 'smooth' });
 });
+
 
 
 
