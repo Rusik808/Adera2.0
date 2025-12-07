@@ -29,8 +29,8 @@ const DATA = {
       { slug: "maloshumnaja_kanalizatsija", title: "Трубы малошумной канализации", image: "img/1828.png" },
       { slug: "pnd-pipes", title: "Трубы ПНД", image: "img/871.png" },
       { slug: "sistema_iz_nerzhaveyushchej_stali", title: "Система из нержавеющей стали", image: "img/SS_Sys4.png" },
-      { slug: "sistema_trub_pex", title: "Системы полиэтиленовых труб и аксиальных фитингов", image: "img/Системы полиэтиленовых труб и аксиальных фитингов.png" },
-       { slug: "sistema_metalloplastikovykh_trub", title: "Система металлопластиковых труб", image: "img/Системы полиэтиленовых труб и аксиальных фитингов.png" },
+      { slug: "sistema_trub_pex", title: "Системы полиэтиленовых труб и аксиальных фитингов", image: "img/системаполиэт.png" },
+       { slug: "sistema_metalloplastikovykh_trub", title: "Система металлопластиковых труб", image: "img/системаметало.jpg" },
       
       
     ],
@@ -670,6 +670,7 @@ document.addEventListener('click', (e) => {
 
   window.scrollTo({ top: y, behavior: 'smooth' });
 });
+
 
 
 
