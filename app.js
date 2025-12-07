@@ -10,7 +10,7 @@ const DATA = {
     { slug: "armatura", title: "Запорная арматура", image: "img/запорная-арматура.png" },
     { slug: "welding_machine", title: "Сварочное оборудование", image: "img/296.png" },
     { slug: "tekhnicheskaya-teploizolyatsiya", title: "Техническая теплоизоляция", image: "img/ТЕХтепло.jpg" },
-    { slug: "krany-mvi", title: "Краны MVI", image: "img/Краны_MVI.jpg" }
+    { slug: "krany-mvi", title: "Краны MVI", image: "img/Краны_MVI.png" }
   ],
 
   
@@ -671,6 +671,7 @@ document.addEventListener('click', (e) => {
 
   window.scrollTo({ top: y, behavior: 'smooth' });
 });
+
 
 
 
